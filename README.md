@@ -15,7 +15,7 @@ All the following dependencies should be installed via R:
 > install.packages(c("shiny","shinyjs","stockfish","rchess","bigchess"))
 ```
 
-And stockfish binary should be downloaded.
+And the stockfish binary file should be available.
 
 ## Launch
 
