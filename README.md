@@ -30,7 +30,7 @@ It starts with 2 disabled action buttons: "Open" and "Analysis".
 
 ## Use
 
-ShinyChess uses the portable game notation (PGN). The playable text area can process one or several PGN instructions, up to a whole party. /!\ numbers such as 1. are accepted but must be separated from the moves (e.g. "1. e4" not "1.e4") ; checks and mates must be notified ; ponctuations (? or !) are not accepted. The party is recorded as a text to ease archiving. A checkbox allows listing all possible moves (it signals checks an mates).
+ShinyChess uses the portable game notation (PGN). The playable text area can process one or several PGN instructions, up to a whole party. /!\ Turn identifiers such as 1. are accepted but must be separated from the moves (e.g. "1. e4" not "1.e4") ; checks and mates must be notified ; ponctuations (? or !) are not accepted. The party is recorded as a text to ease archiving. A checkbox allows listing all possible moves (it signals checks an mates).
 
 A series of action buttons are available:
 - "Move" plays the instruction(s) in the playable text area.
