@@ -122,7 +122,7 @@ server <- function(input, output, session) {
 
   ### connect stockfish
   observeEvent(input$path.bin, {
-    system(paste0("chmod +x ",input$path.bin$datapath))
+    if(Sys.info()["sysname"] == "Linux") system(paste0("chmod +x ",input$path.bin$datapath))
     values[["engine"]] = fish$new(input$path.bin$datapath)
     values[["engine"]]$uci()
     shinyjs::enable("analysis_launch")
