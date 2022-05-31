@@ -118,6 +118,7 @@ server <- function(input, output, session) {
                       choices  = c("",names(values[["openings"]])),
                       selected = "")
     shinyjs::enable("plop")
+    shinyjs::disable("openL")
   })
 
   ### connect stockfish
