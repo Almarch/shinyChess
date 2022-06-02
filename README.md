@@ -25,16 +25,16 @@ $ R -e "shiny::runApp('~/.../shinyChess')"
 ```
 
 It starts with 2 disabled action buttons: "Open" and "Analysis".
-- To enable "Open", simply click "Load openings". This will load the opening repository provided with the rchess package and run a pre-processing.
-- To enable "Analysis", click "browse" and load your stockfish binary file.
+- To enable "Open", click "Load openings". This will load the opening collection provided with the rchess package and run a pre-processing.
+- To enable "Analysis", click "Browse..." and load the stockfish binary file.
 
 ## Use
 
-ShinyChess uses the portable game notation (PGN). The playable text area can process one or several PGN instructions, up to a whole party. /!\ Turn identifiers such as 1. are accepted but must be separated from the moves (e.g. "1. e4" not "1.e4") ; checks and mates must be notified ; ponctuations (? or !) are not accepted. The party is recorded as a text to ease archiving. A checkbox allows listing all possible moves (it signals checks an mates).
+ShinyChess uses the portable game notation (PGN). The playable text area can process one or several PGN instructions, up to a whole party. /!\ Turn identifiers such as "1." are accepted but must be separated from the moves with a space (e.g. "1. e4" not "1.e4") ; checks and checkmates must be notified (respectively "+" and "#") ; comments (such as "?" or "!") are not accepted. The party is recorded as a text to ease archiving. A checkbox allows listing all possible moves (it signals checks an checkmates).
 
 A series of action buttons are available:
 - "Move" plays the instruction(s) in the playable text area.
-- "Open" play the opening if an opening has been selected in the corresponding dropdown list.
+- "Open" plays the opening if an opening has been selected in the corresponding dropdown list.
 - "Analysis" processes each move of the party using stockfish, with a dedicated time / move that is provided in the corresponding box.
 - The navigation arrows allow a move-by-move exploration of the party, for the board visualization as well as for the analysis plot.
 
