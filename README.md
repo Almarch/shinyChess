@@ -19,7 +19,7 @@ And the stockfish binary file should be available.
 
 ## Launch
 
-ShinyChess is a shiny app and can be launched from R using the ```source()``` command, or as a command line:
+ShinyChess is a shiny app and can be launched from R using the ```source()``` command, from RStudio using the "Run App" button, or as a command line:
 ```
 $ R -e "shiny::runApp('~/.../shinyChess')"
 ```
