@@ -39,7 +39,7 @@ A series of action buttons are available:
 - "Open" plays the opening if an opening has been selected in the corresponding dropdown list.
 - "Analysis" processes each move of the party using stockfish, with a dedicated time / move that is provided in the corresponding box.
 - The navigation arrows allow a move-by-move exploration of the party, for the board visualization as well as for the analysis plot.
-- 
+
 ![Screenshot from 2023-09-29 16-27-55](https://github.com/Almarch/shinyChess/assets/13364928/8c577803-e4b0-47c3-bd61-516137649082)
 
 The analysis plot takes all analyzed moves as x and the advantage in centipawn (cp) as y on a sigmoid scale. A positive value is an advantage for White and a negative value is an advantage for Black. The vertical red line identifies the current move. On top, the exact advantage and the best next move are displayed. The plot starts at move 0, with the best first move for White to open the party.
