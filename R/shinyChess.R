@@ -6,10 +6,28 @@
 #'
 #'
 
-shinychess = function(port = 1997, host = "127.0.0.1"){
+shinychess = function(port = 1997,
+                      host = "127.0.0.1",
+                      path.bin = "/usr/local/bin/stockfish"){
 
 options(shiny.port = port,
 	      shiny.host = host)
+
+  ### load openings
+  data("chessopenings")
+  party.tmp = Chess$new()
+  openings = c()
+  for(nam in unique(chessopenings$name)){
+    tmp = chessopenings$pgn[which(chessopenings$name == nam)]
+    tmp = tmp[which.max(nchar(tmp))]
+    party.tmp$load_pgn(tmp)
+    openings[nam] = party.tmp$pgn()
+  }
+  openings = openings[which(unlist(lapply(openings, function(x) length(unlist(strsplit(x,split=" ",fixed=T))))) > 2)]
+
+# load stockfish
+  engine = fish$new(path.bin)
+  engine$uci()
 
 ui <- fluidPage(
   tags$head(
