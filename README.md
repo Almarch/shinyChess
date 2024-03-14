@@ -42,17 +42,17 @@ It may now be launched from R
 
 ```{r}
 library(shinyChess)
-shinychess(port = 1997, path.stockfish = "/usr/local/bin/stockfish"
+shinychess(port = 1997, path.bin = "/usr/local/bin/stockfish")
 ```
 
 The app now runs at http://127.0.0.1:1997/
 
 ### Installation with Docker
 
-Install shinyChess without the need for an R environment using docker:
+Install shinyChess without the need for an R environment using docker. Pull the Dockerfile from within the shinyChess repository, as both shinyChess and the Stockfish binary will be added to the container:
 
 ```{bash}
-cps shinyChess
+cp shinyChess/Dockerfile .
 docker build -t chess .
 ```
 

@@ -5,7 +5,11 @@
 \alias{shinychess}
 \title{A Shiny application to play and study chess}
 \usage{
-shinychess(port = 1997, host = "127.0.0.1")
+shinychess(
+  port = 1997,
+  host = "127.0.0.1",
+  path.bin = "/usr/local/bin/stockfish"
+)
 }
 \arguments{
 \item{port}{The port to use for shiny, default is 1997}
