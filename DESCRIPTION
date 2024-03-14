@@ -1,0 +1,10 @@
+Package: shinyChess
+Title: Play chess online with R
+Version: 1.0.0
+Author@R:
+    person(email = "almarch@github.com")
+Descripton: play chess online
+License: CC0 1.0 Universal
+Encoding: UTF-8
+Depends: shiny, rchess, stockfish, bigchess
+RoxygenNote: 7.2.3

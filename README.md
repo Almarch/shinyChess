@@ -4,35 +4,64 @@ The purpose of this app is to provide a shiny interface to play and study chess.
 
 ![Screenshot from 2023-09-29 16-28-17](https://github.com/Almarch/shinyChess/assets/13364928/6dcfedc7-2369-4f4d-a026-101ca7597965)
 
-## Dependencies
+## Dependency
 
-The app is designed to work on Linux and Windows environments. It uses 2 powerful libraries:
+The app uses [Stockfish](https://stockfishchess.org/). Clone the repository with its submodules and build Stockfish:
 
-- rchess (https://cran.r-project.org/web/packages/rchess/index.html), that wrapes the chess.js engine (https://github.com/jhlywa/chess.js) into R along with a collection of openings and a neat graphical board.
-- stockfish (https://stockfishchess.org/), the reference chess AI that is connected to R via the homonymous package (https://cran.r-project.org/web/packages/stockfish/index.html).
-
-All the following dependencies should be installed via R:
-
-```
-> install.packages(c("shiny","shinyjs","stockfish","rchess","bigchess"))
+```{bash}
+git clone --recursive https://almarch/shinyChess.git
+cd shinyChess/lib/Stockfish
+make
+cd ../../..
 ```
 
-And the stockfish binary file should be available.
+## Installation
 
-## Launch
+Install shinyChess either with R either with Docker.
 
-ShinyChess is a shiny app and can be launched from R using the ```source()``` command, from RStudio using the "Run App" button, or as a command line:
+### Installation with R
+
+Install shinyChess as a regular R package:
+
+```{bash}
+R CMD INSTALL shinyChess
 ```
-$ R -e "shiny::runApp('~/.../shinyChess')"
+
+It may now be launched from R
+
+```{r}
+library(shinyChess)
+shinychess(port = 1997)
 ```
 
-It starts with 2 disabled action buttons: "Open" and "Analysis".
-- To enable "Open", click "Load openings". This will load the opening collection provided with the rchess package and run a pre-processing.
-- To enable "Analysis", click "Browse..." and load the stockfish binary file.
+The app now runs at http://127.0.0.1:1997/
+
+### Installation with Docker
+
+Install shinyChess without the need for an R environment using docker:
+
+```{bash}
+cps shinyChess
+docker build -t chess .
+```
+
+The container can now be run:.
+
+```{bash}
+docker run -d -p 1997:80 chess
+```
+
+The app now runs at http://127.0.0.1:1997/
+
+## Deployment
+
+Check out [shinyGotchi project](https://github.com/almarch/shinyGotchi) for a step⁻by-step deployment as a web app.
+
+shinyGotchi's port has been defined at 1996 and shinyChess's at 1997 because these are 2 pivotal dates for these games respectively and for the global perception of AI in its broadest sense.
 
 ## Use
 
-ShinyChess uses the portable game notation (PGN). The playable text area can process one or several PGN instructions, up to a whole party. /!\ Turn identifiers such as "1." are accepted but must be separated from the moves with a space (e.g. "1. e4" not "1.e4") ; checks and checkmates must be notified (respectively "+" and "#") ; comments (such as "?" or "!") are not accepted. The party is recorded as a text to ease archiving. A checkbox allows listing all possible moves (it signals checks an checkmates).
+ShinyChess uses the portable game notation (PGN). The playable text area can process one or several PGN instructions, up to a whole party. Turn identifiers such as "1." are accepted but must be separated from the moves with a space (e.g. "1. e4" not "1.e4") ; checks and checkmates must be notified (respectively "+" and "#") ; comments (such as "?" or "!") are not accepted. The party is recorded as a text to ease archiving. A checkbox allows listing all possible moves (it signals checks an checkmates).
 
 A series of action buttons are available:
 - "Move" plays the instruction(s) in the playable text area.

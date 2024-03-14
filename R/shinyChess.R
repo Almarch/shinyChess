@@ -1,23 +1,31 @@
+#' A Shiny application to play and study chess
+#'
+#'@name shinyChess
+#'@param port The port to use for shiny, default is 1997
+#'@export shinychess
+#'
+#'
 
-# required packages
-library(shiny)
-library(shinyjs)
-library(rchess)
-library(stockfish)
-library(bigchess)
+shinychess = function(port = 1997, host = "127.0.0.1"){
 
-ui <- pageWithSidebar(
+options(shiny.port = port,
+	      shiny.host = host)
+
+ui <- fluidPage(
+  tags$head(
+		  tags$link(rel = "icon shortcut",
+			          type="image/png",
+			          href = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAAAXNSR0IArs4c6QAAAkpJREFUOE+l009IFFEcwPHv7M7MpvvPQiz2spR6EDNRIRGJMVgLobC0gxnd+h9REKVR3TPoEEQSJQYR1EGKssQWIsMO1clOBRFKhVRkbrk7s7vzJ95sba6ypx4M82bm9z6/3294T5p/98jhP4a0FHAkGcc2sVFIZEspkxN4PcUzFACmafHmE/h8CqtCJVwdHqH/cBd+b6qoUAAkUwZPp+a492CMtjaN8fEn7OzcTnNDNZGQhYcs0hKqANBNmZv3XzP6eAxFUdzQqqoqAoEAleuidMc2UOLRkaR/TB4wLZtX7w0GLl1B0zTi8bgb6PF4CAaD1NbWEgr6OdSjoaLn63ABx3FYsIMcP3eZ2dlZ/H4/iUQiH2SapovU19fTsrGBLU0VyN5cFS6QMW1Gnn1g8NoQtm27WUV2cQlcAGJeV1fnzgfOH2GlmszFCOBnxse+kxeZnp4uWCgqMQwDy7Ly1bS3t7O+ppoubS2q4kWaezvqfJ6X6d1/ilAo5LYQjUbZ09NNecUa+vrPuoCoRGRsbW11ny/07SWgmn+A7xkGBkeYmHjulnniYC+lKty4G2dy8oXblgDEEFU1NjZy+uhuImEr18KPxAIzXw2+zGcpD/tYHVYYfznD9aFhtwUx/gLiLtrY0aHRUlOWA8RL3ciwkEyhqgofEz4OHDuDruv5hYv3TywWY1NLEx3NkRyw+KORNhl+OMWt23eKbt9IJELntq3s2ly5HEjpaWa+ZfmVTFPsmIqfWRZQiFasWA6IdtKZLOJgFQUARZFRFZnfbCIYoijfUngAAAAASUVORK5CYII=")
+  ),
   headerPanel(""),
+
   sidebarPanel(
-    
-    shinyjs::useShinyjs(),
     
     ### actions
     textInput("move", "Play (white):"),
     actionButton("play", "Move"),
-    disabled(actionButton("plop", "Open")),
-    disabled(actionButton("analysis_launch","Analysis")),
-    br(),
+    actionButton("plop", "Open"),
+    actionButton("analysis_launch","Analysis"),
     
     ## pgn
     textOutput("pgn_out"),
@@ -25,35 +33,28 @@ ui <- pageWithSidebar(
     ## possible moves
     checkboxInput("show_moves", "Show all possible moves",F),
     textOutput("possible_moves"),
-    br(),
     
     ## navigation
     actionButton("first", "<<"),
     actionButton("pre"  , "<" ),
     actionButton("nex"  , ">" ),
     actionButton("last" , ">>"),
-    br(),
     
     ## openings
-    selectInput(inputId = "open",
-                label = "Openings:",
-                choices = ""),
-    actionButton("openL" , "Load openings"),
-    
-    ## stockfish link
-    fileInput(inputId  = "path.bin",
-              label    = "Stockfish:",
-              multiple = FALSE,
-              accept=".",
-              buttonLabel = "Browse...",
-              placeholder = "No file selected"),
-    
-    numericInput("movetime", "Time (sec) per move analysis:",value = 5)
+   selectInput(inputId = "open",
+                          label = "Openings:",
+                          choices  = c("",names(openings)),
+                          selected = ""),
+
+    ## analysis
+    numericInput("movetime", "Analysis (sec/move):",value = 5),
+    br()
   ),
+
   mainPanel(
     chessboardjsOutput('board', width = 300),
     plotOutput("analysis_along")
-  )
+  ),
 )
 
 server <- function(input, output, session) {
@@ -90,8 +91,7 @@ server <- function(input, output, session) {
   }
 
   ### init
-  options(shiny.maxRequestSize=120*1024^2) # 120 Mo max to load stockfish (ie 46 Mo)
-  
+
   values <- reactiveValues()
   values[["party"]] = Chess$new()  # the current position and Chess item
   values[["track"]] = ""     # the temporary track in which the player currently is
@@ -99,40 +99,11 @@ server <- function(input, output, session) {
   values[["bestmove"]] = c()
   values[["Analyzed"]] = NULL
   values[["nmoves"]] = NULL
-  values[["engine"]] = NULL
-  values[["openings"]] = c()
-  
-  # openings
-  observeEvent(input$openL, {
-    data("chessopenings")
-    party.tmp = Chess$new()
-    for(nam in unique(chessopenings$name)){
-      tmp = chessopenings$pgn[which(chessopenings$name == nam)]
-      tmp = tmp[which.max(nchar(tmp))]
-      party.tmp$load_pgn(tmp)
-      values[["openings"]][nam] = party.tmp$pgn()
-    }
-    values[["openings"]] = values[["openings"]][which(unlist(lapply(values[["openings"]], function(x) length(unlist(strsplit(x,split=" ",fixed=T))))) > 2)]
-    updateSelectInput(session,
-                      "open",
-                      choices  = c("",names(values[["openings"]])),
-                      selected = "")
-    shinyjs::enable("plop")
-    shinyjs::disable("openL")
-  })
-
-  ### connect stockfish
-  observeEvent(input$path.bin, {
-    if(Sys.info()["sysname"] == "Linux") system(paste0("chmod +x ",input$path.bin$datapath))
-    values[["engine"]] = fish$new(input$path.bin$datapath)
-    values[["engine"]]$uci()
-    shinyjs::enable("analysis_launch")
-  })
   
   ### play opening
   observeEvent(input$plop, {
     if(input$open != ""){
-      values[["party"]]$load_pgn(values[["openings"]][input$open])
+      values[["party"]]$load_pgn(openings[input$open])
     }
     values[["track"]] = values[["party"]]$pgn()
     values[["cp"]] = c()
@@ -168,11 +139,11 @@ server <- function(input, output, session) {
     
     if(is.null(values[["Analyzed"]])) {
       
-      values[["engine"]]$ucinewgame()
-      values[["engine"]]$run("position startpos")
-      values[["engine"]]$go(movetime = input$movetime*1e3)
+      engine$ucinewgame()
+      engine$run("position startpos")
+      engine$go(movetime = input$movetime*1e3)
       Sys.sleep(input$movetime+0.5)
-      eval = values[["engine"]]$run("eval")
+      eval = engine$run("eval")
       
       values[["Analyzed"]] = 0
       values[["cp"]] = eval2cp(eval)
@@ -188,10 +159,10 @@ server <- function(input, output, session) {
       toAnalyze = 1:length(uci)
       
       for(i in toAnalyze[which(!(toAnalyze %in% values[["Analyzed"]]))]){
-        values[["engine"]]$run(paste0("position startpos moves ", paste(uci[1:i],collapse=" ")))
-        values[["engine"]]$go(movetime = input$movetime*1e3)
+        engine$run(paste0("position startpos moves ", paste(uci[1:i],collapse=" ")))
+        engine$go(movetime = input$movetime*1e3)
         Sys.sleep(input$movetime+0.5)
-        eval = values[["engine"]]$run("eval")
+        eval = engine$run("eval")
         
         values[["Analyzed"]] = c(values[["Analyzed"]],i)
         values[["cp"]] = c(values[["cp"]],eval2cp(eval))
@@ -278,10 +249,10 @@ server <- function(input, output, session) {
                                      inputId = "open",
                                      label = "Opening:",
                                      choices  = c("",
-                                                  names(values[["openings"]])),
+                                                  names(openings)),
                                      selected =
-                                       if(values[["party"]]$pgn() %in% values[["openings"]])
-                                         names(values[["openings"]])[which(values[["openings"]] == values[["party"]]$pgn())] else ""
+                                       if(values[["party"]]$pgn() %in% openings)
+                                         names(openings)[which(openings == values[["party"]]$pgn())] else ""
                    )
                    
                    ### save
@@ -307,3 +278,5 @@ server <- function(input, output, session) {
 # launch shiny
 
 shinyApp(ui, server)
+
+}
