@@ -17,11 +17,11 @@ The app uses [Stockfish](https://stockfishchess.org/). Clone the repository and 
 ```{bash}
 git submodule init
 git submodule update
-cd shinyChess/src/Stockfish/src
-make -j profile-build ARCH=x86-64-avx2
-mkdir ../../../inst/bin
-cp stockfish ../../../inst/bin/stockfish
-cd ../../../..
+cd shinyChess/Stockfish/src
+make -j profile-build
+mkdir ../../inst/bin
+cp stockfish ../../inst/bin/stockfish
+cd ../../..
 ```
 
 The installation can then be proceeded either with R either with Docker.
