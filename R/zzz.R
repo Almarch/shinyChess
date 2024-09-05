@@ -1,6 +1,5 @@
-### www & bin repo
-.onLoad <- function(libname, pkgname) {
-    addResourcePath("www", system.file("www", package = "shinyChess"))
-    addResourcePath("bin", system.file("bin", package = "shinyChess"))
-}
 
+.onLoad <- function(libname, pkgname) {
+    resources <- system.file("www", package = "shinyChess")
+    addResourcePath("www", resources)
+}

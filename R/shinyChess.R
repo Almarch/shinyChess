@@ -25,7 +25,7 @@ options(shiny.port = port,
   openings = openings[which(unlist(lapply(openings, function(x) length(unlist(strsplit(x,split=" ",fixed=T))))) > 2)]
 
 # load stockfish
-  engine = fish$new("bin/stockfish")
+  engine = fish$new(system.file("bin", "stockfish", package = "shinyChess"))
   engine$uci()
 
 ui <- fluidPage(

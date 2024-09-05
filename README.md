@@ -15,22 +15,14 @@ git clone https://github.com/almarch/shinyChess.git
 The app uses [Stockfish](https://stockfishchess.org/). Clone the repository and build it (adapt ARCH to the actual target architecture).
 
 ```{bash}
+cd shinyChess
 git submodule init
 git submodule update
-cd shinyChess/Stockfish/src
+cd Stockfish/src
 make -j profile-build
 mkdir ../../inst/bin
 cp stockfish ../../inst/bin/stockfish
 cd ../../..
-```
-
-The installation can then be proceeded either with R either with Docker.
-
-### Installation with R
-
-Install shinyChess as a regular R package:
-
-```{bash}
 R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/rchess/rchess_0.1.tar.gz', repos = NULL, type = 'source')"
 R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/stockfish/stockfish_1.0.0.tar.gz', repos = NULL, type = 'source')"
 R -e "install.packages('bigchess', version = '1.9.1')"
@@ -40,8 +32,7 @@ R CMD INSTALL shinyChess
 It may now be launched from R
 
 ```{r}
-library(shinyChess)
-shinychess(port = 1997)
+R -e "library(shinyChess); shinychess(port = 1997)"
 ```
 
 The app now runs at http://127.0.0.1:1997/
