@@ -7,8 +7,7 @@
 #'
 
 shinychess = function(port = 1997,
-                      host = "127.0.0.1",
-                      path.bin = "/usr/local/bin/stockfish"){
+                      host = "127.0.0.1"){
 
 options(shiny.port = port,
 	      shiny.host = host)
@@ -26,14 +25,25 @@ options(shiny.port = port,
   openings = openings[which(unlist(lapply(openings, function(x) length(unlist(strsplit(x,split=" ",fixed=T))))) > 2)]
 
 # load stockfish
-  engine = fish$new(path.bin)
+  engine = fish$new("bin/stockfish")
   engine$uci()
 
 ui <- fluidPage(
   tags$head(
-		  tags$link(rel = "icon shortcut",
-			          type="image/png",
-			          href = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAAAAXNSR0IArs4c6QAAAkpJREFUOE+l009IFFEcwPHv7M7MpvvPQiz2spR6EDNRIRGJMVgLobC0gxnd+h9REKVR3TPoEEQSJQYR1EGKssQWIsMO1clOBRFKhVRkbrk7s7vzJ95sba6ypx4M82bm9z6/3294T5p/98jhP4a0FHAkGcc2sVFIZEspkxN4PcUzFACmafHmE/h8CqtCJVwdHqH/cBd+b6qoUAAkUwZPp+a492CMtjaN8fEn7OzcTnNDNZGQhYcs0hKqANBNmZv3XzP6eAxFUdzQqqoqAoEAleuidMc2UOLRkaR/TB4wLZtX7w0GLl1B0zTi8bgb6PF4CAaD1NbWEgr6OdSjoaLn63ABx3FYsIMcP3eZ2dlZ/H4/iUQiH2SapovU19fTsrGBLU0VyN5cFS6QMW1Gnn1g8NoQtm27WUV2cQlcAGJeV1fnzgfOH2GlmszFCOBnxse+kxeZnp4uWCgqMQwDy7Ly1bS3t7O+ppoubS2q4kWaezvqfJ6X6d1/ilAo5LYQjUbZ09NNecUa+vrPuoCoRGRsbW11ny/07SWgmn+A7xkGBkeYmHjulnniYC+lKty4G2dy8oXblgDEEFU1NjZy+uhuImEr18KPxAIzXw2+zGcpD/tYHVYYfznD9aFhtwUx/gLiLtrY0aHRUlOWA8RL3ciwkEyhqgofEz4OHDuDruv5hYv3TywWY1NLEx3NkRyw+KORNhl+OMWt23eKbt9IJELntq3s2ly5HEjpaWa+ZfmVTFPsmIqfWRZQiFasWA6IdtKZLOJgFQUARZFRFZnfbCIYoijfUngAAAAASUVORK5CYII=")
+    tags$link(rel  = "icon shortcut",
+              type = "image/png",
+              href = "www/icon.png"), 
+    tags$link(rel  = "stylesheet",
+              type = "text/css",
+              href = "www/styles.css"),
+    # font
+    tags$link(rel  = "preconnect",
+              href = "https://fonts.googleapis.com"),
+    tags$link(rel  = "preconnect",
+              href = "https://fonts.gstatic.com",
+              crossorigin = "anonymous"),
+    tags$link(rel  = "stylesheet",
+              href = "https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap")
   ),
   headerPanel(""),
 

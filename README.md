@@ -35,6 +35,9 @@ The installation can then be proceeded  either with R either with Docker.
 Install shinyChess as a regular R package:
 
 ```{bash}
+R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/rchess/rchess_0.1.tar.gz', repos = NULL, type = 'source')"
+R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/stockfish/stockfish_1.0.0.tar.gz', repos = NULL, type = 'source')"
+R -e "install.packages('bigchess', version = '1.9.1')"
 R CMD INSTALL shinyChess
 ```
 
@@ -42,7 +45,7 @@ It may now be launched from R
 
 ```{r}
 library(shinyChess)
-shinychess(port = 1997, path.bin = "/usr/local/bin/stockfish")
+shinychess(port = 1997)
 ```
 
 The app now runs at http://127.0.0.1:1997/
@@ -83,3 +86,10 @@ A series of action buttons are available:
 ![Screenshot from 2023-09-29 16-27-55](https://github.com/Almarch/shinyChess/assets/13364928/8c577803-e4b0-47c3-bd61-516137649082)
 
 The analysis plot takes all analyzed moves as x and the advantage in centipawn (cp) as y on a sigmoid scale. A positive value is an advantage for White and a negative value is an advantage for Black. The vertical red line identifies the current move. On top, the exact advantage and the best next move are displayed. The plot starts at move 0, with the best first move for White to open the party.
+
+
+## License
+
+This work is licensed under CC0 1.0 Universal
+
+Favicon: <a href="https://en.wikipedia.org/wiki/User:Cburnett" class="extiw" title="en:User:Cburnett">en:User:Cburnett</a> (knight); <a href="//commons.wikimedia.org/wiki/User:Francois-Pier" title="User:Francois-Pier">Francois-Pier</a> (zebra)<span class="int-own-work" lang="en"></span>, <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=48218187">Link</a>
