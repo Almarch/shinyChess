@@ -9,26 +9,22 @@ The purpose of this app is to provide a shiny interface to play and study chess.
 Start by cloning the repository.
 
 ```{bash}
-git clone https://almarch/shinyChess.git
+git clone https://github.com/almarch/shinyChess.git
 ```
 
-The app uses [Stockfish](https://stockfishchess.org/)
- Clone the repository and build it (adapt ARCH to the actual target architecture).
+The app uses [Stockfish](https://stockfishchess.org/). Clone the repository and build it (adapt ARCH to the actual target architecture).
 
 ```{bash}
-git clone https://github.com/official-stockfish/Stockfish.git
-cd Stockfish/src
-make -j profile-build ARCH=x86-64-avx2
-cd ../..
+git submodule init
+git submodule update
+cd shinyChess/Stockfish/src
+make -j profile-build
+mkdir ../../inst/bin
+cp stockfish ../../inst/bin/stockfish
+cd ../../..
 ```
 
-For a global installation, the binary may be stored in /usr/local/bin/, which is the default location the app will look for stockfish:
-
-```{bash}
-sudo cp Stockfish/src /usr/local/bin/
-```
-
-The installation can then be proceeded  either with R either with Docker.
+The installation can then be proceeded either with R either with Docker.
 
 ### Installation with R
 
