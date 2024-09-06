@@ -6,7 +6,7 @@ This is an app to play & study chess. It lies upon powerful tools:
     - the chess engine [chess.js](https://github.com/jhlywa/chess.js). It ensures the game playability and rules integrity.
     - the chess graphical board [chessboardjs](https://github.com/oakmac/chessboardjs). The board design comes from there.
 - The chess solver [stockfish](https://github.com/official-stockfish/Stockfish). This is the AI that is used to analyse the parties and predict the next best move.
-- The web framework [shiny](https://github.com/rstudio/shiny). It supports the user interface and allow for web deployment.
+- The web framework [shiny](https://github.com/rstudio/shiny). It allows for web deployment and the development of a user interface.
 
 <div align="center">
 <div style="
@@ -55,7 +55,7 @@ Start by cloning the repository.
 git clone https://github.com/almarch/shinyChess.git
 ```
 
-The app uses [Stockfish](https://stockfishchess.org/). Make sure the submodule is properly fetched.
+Make sure Stockfish submodule is properly fetched.
 
 ```sh
 cd shinyChess
