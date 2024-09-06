@@ -30,7 +30,7 @@ body {
 	border-width: 0;
 }
 
-.white-btn:active, .black-btn:active {
+.white-btn:active, .black-btn:active, .action-button:active {
 	box-shadow: none;
 	position: relative;
 	top: 3px;

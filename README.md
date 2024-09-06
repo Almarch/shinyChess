@@ -25,7 +25,7 @@ git submodule update
 Also install all R depedencies. From R:
 
 ```r
-install.packages(c("bsplus","shinyWidgets"))
+install.packages(c("bsplus","shinyWidgets","shinyjs"))
 install.packages('https://cran.r-project.org/src/contrib/Archive/rchess/rchess_0.1.tar.gz', repos = NULL, type = 'source')
 install.packages('https://cran.r-project.org/src/contrib/Archive/stockfish/stockfish_1.0.0.tar.gz', repos = NULL, type = 'source')
 install.packages('bigchess', version = '1.9.1')

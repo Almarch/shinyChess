@@ -18,6 +18,7 @@ options(shiny.port = port,
 
   ui <- fluidPage(
     title = "Play & study chess",
+    useShinyjs(),
     tags$head(
       tags$link(rel  = "icon shortcut",
                 type = "image/png",
@@ -34,8 +35,17 @@ options(shiny.port = port,
       tags$link(rel  = "stylesheet",
                 href = "https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap")
     ),
+
+    # javascript
+    tags$script('
+      Shiny.addCustomMessageHandler("copyClip", function (txt) {
+                  navigator.clipboard.writeText(txt);
+              });
+    '),
+
     headerPanel(""),
 
+    # body
     mainPanel(
       fluidRow(column(6,
         bsplus::bs_accordion(
@@ -196,6 +206,11 @@ options(shiny.port = port,
         class = "white-btn"
       )
     )
+
+    ###  PGN copy-paste
+    observeEvent(input$copy_pgn, {
+      session$sendCustomMessage("copyClip", values[["party"]]$pgn())
+    })
     
     ### play opening
     observeEvent(input$plop, {
