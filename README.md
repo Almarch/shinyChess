@@ -91,13 +91,13 @@ The app now runs at http://127.0.0.1:1997/
 
 ### On your own server
 
- Have a look to [<img src="https://github.com/Almarch/tamaR/raw/main/inst/www/icon.png" alt="tamaR" width="25"/> this project ](https://github.com/Almarch/tamaR?tab=readme-ov-file#4-web-deployment) for web deployment.
+ Have a look to [<img src="https://github.com/Almarch/tamaR/raw/main/inst/www/icon.png" alt="tamaR" width="20"/> this project ](https://github.com/Almarch/tamaR?tab=readme-ov-file#4-web-deployment) for web deployment.
 
 ### On Posit Cloud
 
 <img src="https://docs.posit.co/images/product-icons/posit-icon-fullcolor.png" width="80px" align="right"/>
 
-A demo version is kindly hosted on [Posit Cloud](https://posit.co). Deployment on the Posit Cloud is realized from RStudio using `app/app.R`
+A demo version is kindly hosted on [Posit Cloud](https://posit.co) at [<img src="inst/www/icon.png" width = "20px" /> this adress](https://shinyapps.io/almarch/shinyChess). Deployment on the Posit Cloud is realized from RStudio using `app/app.R`
 
 ## Use
 
