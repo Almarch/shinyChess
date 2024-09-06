@@ -2,20 +2,16 @@
 
 This is an app to play & study chess. It lies upon powerful tools:
 
-- The chess engine , wrapped into the R package . It ensures the game integrity.
-
-- The chess graphical board [chessboardjs]
-
+- The chess solver [stockfish](https://github.com/official-stockfish/Stockfish). This is the AI that is used to analyse the parties and predict the next best move.
 - The chess library [rchess](https://github.com/jbkunst/rchess), that wraps:
     - the chess engine [chess.js](https://github.com/jhlywa/chess.js). It ensures the game playability and rules integrity.
     - the chess graphical board [chessboardjs](https://chessboardjs.com/). The board design comes from there.
-- The chess solver [stockfish](https://github.com/official-stockfish/Stockfish). This is the AI that is used to analyse the parties and predict the next best move.
 - The web framework [shiny](). It supports the user interface and allow for web deployment.
 
-<div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-    <img src="https://via.placeholder.com/300" alt="Image 1"  width="150px">
-    <img src="https://stockfishchess.org/images/logo/icon_512x512@2x.png" alt="Image 2"  width="200px">
-    <img src="https://camo.githubusercontent.com/b1bcd1d17cbe316d92317dbdcfead95a3fef02332b2ac8333ea09bd91365d74e/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f7468756d622f622f62662f5368696e795f6865785f6c6f676f2e7376672f38303070782d5368696e795f6865785f6c6f676f2e7376672e706e67" alt="Image 3"  width="170px">
+<div style="display: flex; flex-direction: row;" align = "center">
+    <img src="https://stockfishchess.org/images/logo/icon_512x512@2x.png" alt="stockfish"  width="200px">
+    <img src="https://github.com/user-attachments/assets/3c73d0fe-169c-49da-84d0-8f5e330bd9ec" alt="chessboardjs"  width="200px">
+    <img src="https://camo.githubusercontent.com/b1bcd1d17cbe316d92317dbdcfead95a3fef02332b2ac8333ea09bd91365d74e/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f7468756d622f622f62662f5368696e795f6865785f6c6f676f2e7376672f38303070782d5368696e795f6865785f6c6f676f2e7376672e706e67" alt="Shiny"  width="170px">
 </div>
 
 ## Installation
