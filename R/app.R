@@ -29,6 +29,7 @@ options(shiny.port = port,
   engine$uci()
 
 ui <- fluidPage(
+  title = "Play & study chess",
   tags$head(
     tags$link(rel  = "icon shortcut",
               type = "image/png",
@@ -48,7 +49,7 @@ ui <- fluidPage(
   headerPanel(""),
 
   mainPanel(
-    fluidRow(column(4,
+    fluidRow(column(6,
       bsplus::bs_accordion(
             id = "game_info"
         ) |>
@@ -56,52 +57,135 @@ ui <- fluidPage(
             panel_type = "warning"
         ) |>
         bs_append(
-            title = "Portable game notation",
-            content = fluidRow(
-              textOutput("pgn_out"),
-              actionButton("copy_pgn","Copy"),
-              actionButton("paste_pgn","Paste")
+          title = "Portable game notation",
+          content = fluidRow(
+            column(8,textOutput("pgn_out")),
+            column(4,
+              fluidRow(actionBttn(
+                inputId = "copy_pgn",
+                label = "Copy", 
+                style = "simple",
+                color = "warning",
+                width = "25px",
+                icon = icon("scissors")
+              )),
+              br(),
+              fluidRow(actionBttn(
+                inputId = "paste_pgn",
+                label = "Paste", 
+                style = "simple",
+                color = "warning",
+                width = "25px",
+                icon = icon("pencil")
+              )),
+            align="center"
             )
+          )
         ) |>
         bs_append(
-            title = "Openings",
-            content = fluidRow(
+          title = "Openings",
+          content = fluidRow(
+            column(8,
               selectInput(inputId = "open",
                           label = "Openings:",
                           choices  = c("",names(openings)),
-                          selected = ""),
-              actionButton("plop", "Open")
+                          selected = "")
+            ),
+            column(4,
+              br(),
+              fluidRow(actionBttn(
+                  inputId = "plop",
+                  label = "Open", 
+                  style = "simple",
+                  color = "warning",
+                  width = "25px",
+                  icon = icon("book-open")
+                ),
+                align="center"
+              )
             )
+          )
         ) |>
         bs_append(
-            title = "Analysis",
-            content = fluidRow(
-              numericInput("movetime", "Analysis (sec/move):",value = 5),
-              actionButton("analysis_launch","Analysis"),
-              plotOutput("analysis_along")
-            )
+          title = "Analysis",
+          content = column(12,
+            fluidRow(
+              column(6,
+                numericInput("movetime", "Time/move (seconds):",value = 3),
+                align = "center"
+              ),
+              column(6,
+                br(),
+                actionBttn(
+                  inputId = "analysis_launch",
+                  label = "Analysis", 
+                  style = "simple",
+                  color = "warning",
+                  width = "35px",
+                  icon = icon("fish")
+                ),
+                align="center"
+              )
+            ),
+            fluidRow(plotOutput("analysis_along"))
+          )
         )
     ),
-    column(8,
+    column(6,
       fluidRow(column(12,
           chessboardjsOutput('board', width = 300),
           align = "center"
       )),
       fluidRow(
-        column(6,
+        column(6,fluidRow(
           ## navigation
-          actionButton("first", "<<"),
-          actionButton("pre"  , "<" ),
-          actionButton("nex"  , ">" ),
-          actionButton("last" , ">>"),
+          actionBttn(
+            inputId = "first",
+            label = "", 
+            style = "simple",
+            color = "warning",
+            width = "10px",
+            icon = icon("backward")
+          ),
+          actionBttn(
+            inputId = "pre",
+            label = "", 
+            style = "simple",
+            color = "warning",
+            width = "10px",
+            icon = icon("caret-left")
+          ),
+          actionBttn(
+            inputId = "nex",
+            label = "", 
+            style = "simple",
+            color = "warning",
+            width = "10px",
+            icon = icon("caret-right")
+          ),
+          actionBttn(
+            inputId = "last",
+            label = "", 
+            style = "simple",
+            color = "warning",
+            width = "10px",
+            icon = icon("forward")
+          )),
           align = "center"
         ),
-        column(3,textInput("move", "Play (white):")),
-        column(3,actionButton("play", "Move"))
-
-        ## possible moves
-        #checkboxInput("show_moves", "Show all possible moves",F),
-        #textOutput("possible_moves"),
+        column(6,
+          fluidRow(
+            column(8,
+              selectInput(
+                inputId = "move",
+                label = NULL,
+                choices  = c(""),
+                selected = ""
+              )
+            ),
+            column(4, uiOutput("play"))
+          )
+        )
       )
     ))
   )
@@ -141,7 +225,6 @@ server <- function(input, output, session) {
   }
 
   ### init
-
   values <- reactiveValues()
   values[["party"]] = Chess$new()  # the current position and Chess item
   values[["track"]] = ""     # the temporary track in which the player currently is
@@ -149,6 +232,14 @@ server <- function(input, output, session) {
   values[["bestmove"]] = c()
   values[["Analyzed"]] = NULL
   values[["nmoves"]] = NULL
+
+  output$play = renderUI(
+    actionButton(
+      inputId = "play",
+      label = "Play",
+      class = "white-btn"
+    )
+  )
   
   ### play opening
   observeEvent(input$plop, {
@@ -160,11 +251,19 @@ server <- function(input, output, session) {
     values[["bestmove"]] = c()
     values[["Analyzed"]] = NULL
     
-    updateTextInput(session,
-                    inputId = "move",
-                    label = paste0("Play (",c(w="white",b="black")[values[["party"]]$turn()],"):"),
-                    value = "")
-  })
+    updateSelectInput(session,
+                      inputId = "move",
+                      label = NULL,
+                      choices = c("",values[["party"]]$moves()),
+                      selected = "")
+    output$play = renderUI(
+      actionButton(
+      inputId = "play",
+          label = "Play",
+          class = c(w="white-btn",b="black-btn")[values[["party"]]$turn()]
+        )
+      )
+    })
   
   ### play
   observeEvent(input$play, {
@@ -256,73 +355,73 @@ server <- function(input, output, session) {
                  input$nex   |
                  input$last, {
                    
-                   output$board <- renderChessboardjs({
-                     chessboardjs(values[["party"]]$fen())
-                   })
-                   
-                   values[["nmoves"]] = length(simplify_pgn(values[["party"]]$pgn()))
-                   
-                   output$analysis_along <- renderPlot({
-                     if(length(values[["cp"]])>0) {
-                       nmax = values[["Analyzed"]][length(values[["Analyzed"]])]
-                       plot(values[["Analyzed"]],
-                            sig(values[["cp"]]),
-                            ylim = c(-1,1),
-                            axes = F,
-                            type = "n",
-                            xlab = "",
-                            ylab = "",
-                            main = if(values[["nmoves"]] <= nmax) paste0("cp: ",
-                                                                         values[["cp"]][values[["nmoves"]]+1],
-                                                                         ", best move: ",
-                                                                         values[["bestmove"]][values[["nmoves"]]+1]) else "-")
-                       box()
-                       axis(side = 1, at = values[["Analyzed"]])
-                       axis(side = 2,
-                            at = c(sig(c(-4,-2,-1,0,1,2,4))),
-                            labels =   c(-4,-2,-1,0,1,2,4))
-                       polygon(x = c(-10,-10,rep(length(values[["cp"]])+10,2)),
-                               y = c(-2,0,0,-2),
-                               col="black")
-                       lines(0:(length(values[["cp"]])-1),
-                             sig(values[["cp"]]),
-                             col="grey",lwd=3)
-                       abline(v = values[["nmoves"]],
-                              col = "red",
-                              lwd = 3)
-                     } else {
-                       plot(0,0,axes=F,xlab="",ylab="",main="",type="n")
-                     }
-                   })
-                   
-                   updateSelectInput(session,
-                                     inputId = "open",
-                                     label = "Opening:",
-                                     choices  = c("",
-                                                  names(openings)),
-                                     selected =
-                                       if(values[["party"]]$pgn() %in% openings)
-                                         names(openings)[which(openings == values[["party"]]$pgn())] else ""
-                   )
-                   
-                   ### save
-                   output$pgn_out <- renderText({
-                     return(values[["party"]]$pgn())
-                   })
-                   
-                   output$possible_moves <- renderText({
-                     if(!input$show_moves) {
-                       return("")
-                     } else {
-                       return(values[["party"]]$moves())
-                     }
-                   })
-                   
-                   updateTextInput(session,
-                                   inputId = "move",
-                                   label = paste0("Play (",c(w="white",b="black")[values[["party"]]$turn()],"):"),
-                                   value = "")
-                 })
+    output$board <- renderChessboardjs({
+      chessboardjs(values[["party"]]$fen())
+    })
+    
+    values[["nmoves"]] = length(simplify_pgn(values[["party"]]$pgn()))
+    
+    output$analysis_along <- renderPlot({
+      if(length(values[["cp"]])>0) {
+        nmax = values[["Analyzed"]][length(values[["Analyzed"]])]
+        plot(values[["Analyzed"]],
+            sig(values[["cp"]]),
+            ylim = c(-1,1),
+            axes = F,
+            type = "n",
+            xlab = "",
+            ylab = "",
+            main = if(values[["nmoves"]] <= nmax) paste0("cp: ",
+                                                          values[["cp"]][values[["nmoves"]]+1],
+                                                          ", best move: ",
+                                                          values[["bestmove"]][values[["nmoves"]]+1]) else "-")
+        box()
+        axis(side = 1, at = values[["Analyzed"]])
+        axis(side = 2,
+            at = c(sig(c(-4,-2,-1,0,1,2,4))),
+            labels =   c(-4,-2,-1,0,1,2,4))
+        polygon(x = c(-10,-10,rep(length(values[["cp"]])+10,2)),
+                y = c(-2,0,0,-2),
+                col="black")
+        lines(0:(length(values[["cp"]])-1),
+              sig(values[["cp"]]),
+              col="grey",lwd=3)
+        abline(v = values[["nmoves"]],
+              col = "red",
+              lwd = 3)
+      } else {
+        plot(0,0,axes=F,xlab="",ylab="",main="",type="n")
+      }
+    })
+    
+    updateSelectInput(session,
+                      inputId = "open",
+                      label = "Opening:",
+                      choices  = c("",
+                                  names(openings)),
+                      selected =
+                        if(values[["party"]]$pgn() %in% openings)
+                          names(openings)[which(openings == values[["party"]]$pgn())] else ""
+    )
+    
+    ### save
+    output$pgn_out <- renderText({
+      return(values[["party"]]$pgn())
+    })
+    
+  updateSelectInput(session,
+                    inputId = "move",
+                    label = NULL,
+                    choices = c("",values[["party"]]$moves()),
+                    selected = "")
+  output$play = renderUI(
+    actionButton(
+    inputId = "play",
+        label = "Play",
+        class = c(w="white-btn",b="black-btn")[values[["party"]]$turn()]
+      )
+    )
+  })
 }
 
 # launch shiny
