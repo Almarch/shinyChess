@@ -8,7 +8,12 @@ This is an app to play & study chess. It lies upon powerful tools:
     - the chess graphical board [chessboardjs](https://chessboardjs.com/). The board design comes from there.
 - The web framework [shiny](). It supports the user interface and allow for web deployment.
 
-<div style="display: flex; flex-direction: row;" align = "center">
+<div style="
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;margin: auto;
+">
     <img src="https://stockfishchess.org/images/logo/icon_512x512@2x.png" alt="stockfish"  width="200px">
     <img src="https://github.com/user-attachments/assets/3c73d0fe-169c-49da-84d0-8f5e330bd9ec" alt="chessboardjs"  width="200px">
     <img src="https://camo.githubusercontent.com/b1bcd1d17cbe316d92317dbdcfead95a3fef02332b2ac8333ea09bd91365d74e/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f7468756d622f622f62662f5368696e795f6865785f6c6f676f2e7376672f38303070782d5368696e795f6865785f6c6f676f2e7376672e706e67" alt="Shiny"  width="170px">
@@ -36,6 +41,7 @@ docker run -d -p 1997:80 chess
 The app now runs at http://127.0.0.1:1997/
 
 ### Installation as an R package
+
 <img src="https://camo.githubusercontent.com/b89c3467bd2fb1ed2452237329f6974aec62c88eb423cde6429aad2a8f2383a1/68747470733a2f2f6372616e2e722d70726f6a6563742e6f72672f526c6f676f2e737667" width="80px" align="right"/>
 
 Installation as an R package can only be performed on GNU/Linux because of the Stockfish compilation step.
