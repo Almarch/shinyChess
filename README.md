@@ -10,35 +10,36 @@ Only GNU/Linux OS is currently being supported due to the Stockfish compilation 
 
 Start by cloning the repository.
 
-```{bash}
+```sh
 git clone https://github.com/almarch/shinyChess.git
 ```
 
 The app uses [Stockfish](https://stockfishchess.org/). Make sure the submodule is properly fetched.
 
-```{bash}
+```sh
 cd shinyChess
 git submodule init
 git submodule update
 ```
 
-Also install all R depedencies.
+Also install all R depedencies. From R:
 
-```{bash}
-R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/rchess/rchess_0.1.tar.gz', repos = NULL, type = 'source')"
-R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/stockfish/stockfish_1.0.0.tar.gz', repos = NULL, type = 'source')"
-R -e "install.packages('bigchess', version = '1.9.1')"
+```r
+install.packages("bsplus")
+install.packages('https://cran.r-project.org/src/contrib/Archive/rchess/rchess_0.1.tar.gz', repos = NULL, type = 'source')
+install.packages('https://cran.r-project.org/src/contrib/Archive/stockfish/stockfish_1.0.0.tar.gz', repos = NULL, type = 'source')
+install.packages('bigchess', version = '1.9.1')
 ```
 
 shinyChess can then be installed.
 
-```{bash}
+```sh
 R CMD INSTALL shinyChess
 ```
 
 It may now be launched from R
 
-```{r}
+```r
 R -e "library(shinyChess); shinychess(port = 1997)"
 ```
 
@@ -48,14 +49,14 @@ The app now runs at http://127.0.0.1:1997/
 
 Install shinyChess without the need for an R environment using docker. Pull the Dockerfile from within the shinyChess repository, as both shinyChess and the Stockfish binary will be added to the container:
 
-```{bash}
+```sh
 cp shinyChess/Dockerfile .
 docker build -t chess .
 ```
 
 The container can now be run:.
 
-```{bash}
+```sh
 docker run -d -p 1997:80 chess
 ```
 
@@ -84,6 +85,6 @@ The analysis plot takes all analyzed moves as x and the advantage in centipawn (
 
 ## License
 
-This work is licensed under CC0 1.0 Universal
+This work is licensed under CC0 1.0 Universal.
 
 Favicon: <a href="https://en.wikipedia.org/wiki/User:Cburnett" class="extiw" title="en:User:Cburnett">en:User:Cburnett</a> (knight); <a href="//commons.wikimedia.org/wiki/User:Francois-Pier" title="User:Francois-Pier">Francois-Pier</a> (zebra)<span class="int-own-work" lang="en"></span>, <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=48218187">Link</a>

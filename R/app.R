@@ -47,7 +47,23 @@ ui <- fluidPage(
   ),
   headerPanel(""),
 
-  sidebarPanel(
+  mainPanel(
+
+    bsplus::bs_accordion(
+            id = "admin_running"
+        ) |>
+        bs_append(
+            title = "Portable game notation",
+            content = fluidRow()
+        ) |>
+        bs_append(
+            title = "Openings",
+            content = fluidRow()
+        ) |>
+        bs_append(
+            title = "Analysis",
+            content = fluidRow()
+        ),
     
     ### actions
     textInput("move", "Play (white):"),
@@ -76,10 +92,8 @@ ui <- fluidPage(
 
     ## analysis
     numericInput("movetime", "Analysis (sec/move):",value = 5),
-    br()
-  ),
+    br(),
 
-  mainPanel(
     chessboardjsOutput('board', width = 300),
     plotOutput("analysis_along")
   ),
