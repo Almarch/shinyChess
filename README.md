@@ -12,7 +12,7 @@ This is an app to play & study chess. It lies upon powerful tools:
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    align-items: center;margin: auto;
+    margin: auto;
 ">
     <img src="https://stockfishchess.org/images/logo/icon_512x512@2x.png" alt="stockfish"  width="200px">
     <img src="https://github.com/user-attachments/assets/3c73d0fe-169c-49da-84d0-8f5e330bd9ec" alt="chessboardjs"  width="200px">
