@@ -1,10 +1,16 @@
 # shinyChess
 
-The purpose of this app is to provide a shiny interface to play and study chess.
+This is an app to play & study chess. It lies upon 3 powerful tools:
 
-![Screenshot from 2023-09-29 16-28-17](https://github.com/Almarch/shinyChess/assets/13364928/6dcfedc7-2369-4f4d-a026-101ca7597965)
+- The chess engine [chess.js](https://github.com/jhlywa/chess.js), wrapped into the R package [rchess](https://github.com/jbkunst/rchess). It ensures the game integrity.
+- The chess solver [stockfish](https://github.com/official-stockfish/Stockfish). This is the AI that is used to analyse the parties and predict the next best move.
+- The web framework [shiny](). It supports the user interface and allow for web deployment.
+
+![image](https://github.com/user-attachments/assets/06abaedd-f033-48a4-b5d4-3ef62cda434b)
 
 ## Installation
+
+### Installation as an R package
 
 Only GNU/Linux OS is currently being supported due to the Stockfish compilation step.
 
@@ -62,25 +68,20 @@ docker run -d -p 1997:80 chess
 
 The app now runs at http://127.0.0.1:1997/
 
-## Deployment
-
-Check out [shinyGotchi project](https://github.com/almarch/shinyGotchi) for a step⁻by-step deployment as a web app.
-
-shinyGotchi's port has been defined at 1996 and shinyChess's at 1997 because these are 2 pivotal dates for these games respectively and for the global perception of AI in its broadest sense.
-
 ## Use
 
-ShinyChess uses the portable game notation (PGN). The playable text area can process one or several PGN instructions, up to a whole party. Turn identifiers such as "1." are accepted but must be separated from the moves with a space (e.g. "1. e4" not "1.e4") ; checks and checkmates must be notified (respectively "+" and "#") ; comments (such as "?" or "!") are not accepted. The party is recorded as a text to ease archiving. A checkbox allows listing all possible moves (it signals checks an checkmates).
+### Play and navigate the game
 
-A series of action buttons are available:
-- "Move" plays the instruction(s) in the playable text area.
-- "Open" plays the opening if an opening has been selected in the corresponding dropdown list.
-- "Analysis" processes each move of the party using stockfish, with a dedicated time / move that is provided in the corresponding box.
-- The navigation arrows allow a move-by-move exploration of the party, for the board visualization as well as for the analysis plot.
+![image](https://github.com/user-attachments/assets/29c5f9d9-65d0-46a9-bb1f-aa4e3442c28c)
 
-![Screenshot from 2023-09-29 16-27-55](https://github.com/Almarch/shinyChess/assets/13364928/8c577803-e4b0-47c3-bd61-516137649082)
+### Save and load parties as PGN
 
-The analysis plot takes all analyzed moves as x and the advantage in centipawn (cp) as y on a sigmoid scale. A positive value is an advantage for White and a negative value is an advantage for Black. The vertical red line identifies the current move. On top, the exact advantage and the best next move are displayed. The plot starts at move 0, with the best first move for White to open the party.
+
+
+### Openings
+![image](https://github.com/user-attachments/assets/16e9b028-05af-4a7b-8d06-baf537cdecf7)
+
+### Game analysis
 
 
 ## License
