@@ -38,10 +38,19 @@ options(shiny.port = port,
 
     # javascript
     tags$script('
-      Shiny.addCustomMessageHandler("copyClip", function (txt) {
-                  navigator.clipboard.writeText(txt);
-              });
+      Shiny.addCustomMessageHandler("copyClip", function (message) {
+          navigator.clipboard.writeText(message.txt);
+      });
     '),
+
+    tags$script('
+      Shiny.addCustomMessageHandler("pasteClip", function (message) {
+        navigator.clipboard.readText().then(function (txt) {
+         Shiny.setInputValue(message.id, txt);
+        });
+      });
+    '),
+
 
     headerPanel(""),
 
@@ -57,7 +66,9 @@ options(shiny.port = port,
           bs_append(
             title = "Portable game notation",
             content = fluidRow(
-              column(8,textOutput("pgn_out")),
+              column(8,
+                textOutput("pgn_out")
+              ),
               column(4,
                 fluidRow(actionBttn(
                   inputId = "copy_pgn",
@@ -209,9 +220,33 @@ options(shiny.port = port,
 
     ###  PGN copy-paste
     observeEvent(input$copy_pgn, {
-      session$sendCustomMessage("copyClip", values[["party"]]$pgn())
+      session$sendCustomMessage("copyClip", list(txt = values[["party"]]$pgn()))
     })
-    
+
+    observeEvent(input$paste_pgn, {
+      session$sendCustomMessage("pasteClip", list(id = "paste_tmp"))
+      try({
+        values[["party"]]$load_pgn(input$paste_tmp)
+        values[["track"]] = values[["party"]]$pgn()
+        values[["cp"]] = c()
+        values[["bestmove"]] = c()
+        values[["Analyzed"]] = NULL
+        
+        updateSelectInput(session,
+                          inputId = "move",
+                          label = NULL,
+                          choices = c("",values[["party"]]$moves()),
+                          selected = "")
+        output$play = renderUI(
+          actionButton(
+            inputId = "play",
+            label = "Play",
+            class = c(w="white-btn",b="black-btn")[values[["party"]]$turn()]
+          )
+        )
+      })
+    })
+
     ### play opening
     observeEvent(input$plop, {
       if(input$open != ""){
@@ -229,12 +264,12 @@ options(shiny.port = port,
                         selected = "")
       output$play = renderUI(
         actionButton(
-        inputId = "play",
-            label = "Play",
-            class = c(w="white-btn",b="black-btn")[values[["party"]]$turn()]
-          )
+          inputId = "play",
+          label = "Play",
+          class = c(w="white-btn",b="black-btn")[values[["party"]]$turn()]
         )
-      })
+      )
+    })
     
     ### play
     observeEvent(input$play, {
@@ -321,6 +356,7 @@ options(shiny.port = port,
     ### whatever action is made, plot the board & update the turn
     observeEvent(input$play  |
                   input$plop  |
+                  input$paste_pgn |
                   input$first |
                   input$pre   |
                   input$nex   |
