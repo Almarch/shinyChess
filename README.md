@@ -5,8 +5,8 @@ This is an app to play & study chess. It lies upon powerful tools:
 - The chess solver [stockfish](https://github.com/official-stockfish/Stockfish). This is the AI that is used to analyse the parties and predict the next best move.
 - The chess library [rchess](https://github.com/jbkunst/rchess), that wraps:
     - the chess engine [chess.js](https://github.com/jhlywa/chess.js). It ensures the game playability and rules integrity.
-    - the chess graphical board [chessboardjs](https://chessboardjs.com/). The board design comes from there.
-- The web framework [shiny](). It supports the user interface and allow for web deployment.
+    - the chess graphical board [chessboardjs](https://github.com/oakmac/chessboardjs). The board design comes from there.
+- The web framework [shiny](https://github.com/rstudio/shiny). It supports the user interface and allow for web deployment.
 
 <div style="
     display: flex;
@@ -28,11 +28,12 @@ This is an app to play & study chess. It lies upon powerful tools:
 Install shinyChess without the need for an R environment using Docker. Installation with Docker can be performed from GNU/Linux or Windows.
 
 ```sh
+git clone --recurse-submodules https://github.com/almarch/shinyChess.git
 cd shinyChess
 docker build -t chess .
 ```
 
-The container can now be run:.
+The container can now be launched with Docker.
 
 ```sh
 docker run -d -p 1997:80 chess

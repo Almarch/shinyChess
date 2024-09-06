@@ -8,7 +8,7 @@ RUN R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/stock
 RUN R -e "install.packages('bigchess', version = '1.9.1')"
 
 RUN mkdir -p /app/shinyChess
-ADD ./shinyChess /shinyChess
+ADD . /shinyChess
 
 WORKDIR /
 
