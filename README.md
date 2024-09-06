@@ -1,18 +1,48 @@
-# shinyChess
+# <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Chess_Zdt45.svg/45px-Chess_Zdt45.svg.png?20170728103323" width = "50px" /> shinyChess
 
-This is an app to play & study chess. It lies upon 3 powerful tools:
+This is an app to play & study chess. It lies upon powerful tools:
 
-- The chess engine [chess.js](https://github.com/jhlywa/chess.js), wrapped into the R package [rchess](https://github.com/jbkunst/rchess). It ensures the game integrity.
+- The chess engine , wrapped into the R package . It ensures the game integrity.
+
+- The chess graphical board [chessboardjs]
+
+- The chess library [rchess](https://github.com/jbkunst/rchess), that wraps:
+    - the chess engine [chess.js](https://github.com/jhlywa/chess.js). It ensures the game playability and rules integrity.
+    - the chess graphical board [chessboardjs](https://chessboardjs.com/). The board design comes from there.
 - The chess solver [stockfish](https://github.com/official-stockfish/Stockfish). This is the AI that is used to analyse the parties and predict the next best move.
 - The web framework [shiny](). It supports the user interface and allow for web deployment.
 
-![image](https://github.com/user-attachments/assets/06abaedd-f033-48a4-b5d4-3ef62cda434b)
+<div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+    <img src="https://via.placeholder.com/300" alt="Image 1"  width="150px">
+    <img src="https://stockfishchess.org/images/logo/icon_512x512@2x.png" alt="Image 2"  width="200px">
+    <img src="https://camo.githubusercontent.com/b1bcd1d17cbe316d92317dbdcfead95a3fef02332b2ac8333ea09bd91365d74e/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f7468756d622f622f62662f5368696e795f6865785f6c6f676f2e7376672f38303070782d5368696e795f6865785f6c6f676f2e7376672e706e67" alt="Image 3"  width="170px">
+</div>
 
 ## Installation
 
-### Installation as an R package
+### Installation with Docker
 
-Only GNU/Linux OS is currently being supported due to the Stockfish compilation step.
+<img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Docker_%28container_engine%29_logo_%28cropped%29.png" width="120px" align="right"/>
+
+Install shinyChess without the need for an R environment using Docker. Installation with Docker can be performed from GNU/Linux or Windows.
+
+```sh
+cd shinyChess
+docker build -t chess .
+```
+
+The container can now be run:.
+
+```sh
+docker run -d -p 1997:80 chess
+```
+
+The app now runs at http://127.0.0.1:1997/
+
+### Installation as an R package
+<img src="https://camo.githubusercontent.com/b89c3467bd2fb1ed2452237329f6974aec62c88eb423cde6429aad2a8f2383a1/68747470733a2f2f6372616e2e722d70726f6a6563742e6f72672f526c6f676f2e737667" width="80px" align="right"/>
+
+Installation as an R package can only be performed on GNU/Linux because of the Stockfish compilation step.
 
 Start by cloning the repository.
 
@@ -43,30 +73,26 @@ shinyChess can then be installed.
 R CMD INSTALL shinyChess
 ```
 
-It may now be launched from R
+It may now be launched from R:
 
 ```r
-R -e "library(shinyChess); shinychess(port = 1997)"
+library(shinyChess)
+app(port = 1997)
 ```
 
 The app now runs at http://127.0.0.1:1997/
 
-### Installation with Docker
+## Deployment
 
-Install shinyChess without the need for an R environment using docker.
+### On your own server
 
-```sh
-cd shinyChess
-docker build -t chess .
-```
+ Have a look to [<img src="https://github.com/Almarch/tamaR/raw/main/inst/www/icon.png" alt="tamaR" width="25"/> this project ](https://github.com/Almarch/tamaR?tab=readme-ov-file#4-web-deployment) for web deployment.
 
-The container can now be run:.
+### On Posit Cloud
 
-```sh
-docker run -d -p 1997:80 chess
-```
+<img src="https://docs.posit.co/images/product-icons/posit-icon-fullcolor.png" width="80px" align="right"/>
 
-The app now runs at http://127.0.0.1:1997/
+A demo version is kindly hosted on [Posit Cloud](https://posit.co). Deployment on the Posit Cloud is realized from RStudio using `app/app.R`
 
 ## Use
 
@@ -74,15 +100,14 @@ The app now runs at http://127.0.0.1:1997/
 
 ![image](https://github.com/user-attachments/assets/29c5f9d9-65d0-46a9-bb1f-aa4e3442c28c)
 
-### Save and load parties as PGN
-
-
+### Save and load PGNs
 
 ### Openings
 ![image](https://github.com/user-attachments/assets/16e9b028-05af-4a7b-8d06-baf537cdecf7)
 
 ### Game analysis
 
+![image](https://github.com/user-attachments/assets/06abaedd-f033-48a4-b5d4-3ef62cda434b)
 
 ## License
 
