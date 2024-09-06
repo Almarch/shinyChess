@@ -97,7 +97,7 @@ The app now runs at http://127.0.0.1:1997/
 
 <img src="https://docs.posit.co/images/product-icons/posit-icon-fullcolor.png" width="80px" align="right"/>
 
-A demo version is kindly hosted on [Posit Cloud](https://posit.co) at [<img src="inst/www/icon.png" width = "20px" /> this adress](https://shinyapps.io/almarch/shinyChess). Deployment on the Posit Cloud is realized from RStudio calling `app/app.R` of the [posit branch](https://github.com/Almarch/shinyChess/tree/posit) from RStudio.
+A demo version is kindly hosted on [Posit Cloud](https://posit.co) at [<img src="inst/www/icon.png" width = "20px" /> this adress](https://almarch.shinyapps.io/shinyChess/). Deployment on the Posit Cloud is realized from RStudio calling `app/app.R` of the [posit branch](https://github.com/Almarch/shinyChess/tree/posit) from RStudio.
 
 ## Use
 
