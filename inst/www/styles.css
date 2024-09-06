@@ -8,3 +8,31 @@ body {
 	background: #1F1F1F;
 	color: black;
 }
+
+.white-btn {
+	background-color: white;
+	color: black;
+}
+.black-btn {
+	background-color: black;
+	color: white;
+}
+.white-btn, .black-btn {
+	width: 50px;
+    height: 50px;
+	font-family: "Outfit", sans-serif;
+	text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+	box-shadow: 3px 3px 5px #3a3a3a;
+	border-width: 0;
+}
+
+.white-btn:active, .black-btn:active, .action-button:active {
+	box-shadow: none;
+	position: relative;
+	top: 3px;
+	left: 3px;
+}

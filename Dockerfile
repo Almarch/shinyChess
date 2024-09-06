@@ -1,6 +1,8 @@
 FROM rocker/shiny:4.4.1
 
 RUN R -e "install.packages('bsplus', version = '0.1.4')"
+RUN R -e "install.packages('shinyWidgets', version = '0.8.6')"
+RUN R -e "install.packages('shinyjs', version = '2.1.0')"
 RUN R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/rchess/rchess_0.1.tar.gz', repos = NULL, type = 'source')"
 RUN R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/stockfish/stockfish_1.0.0.tar.gz', repos = NULL, type = 'source')"
 RUN R -e "install.packages('bigchess', version = '1.9.1')"
