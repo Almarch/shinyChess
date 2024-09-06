@@ -6,26 +6,33 @@ The purpose of this app is to provide a shiny interface to play and study chess.
 
 ## Installation
 
+Only GNU/Linux OS is currently being supported due to the Stockfish compilation step.
+
 Start by cloning the repository.
 
 ```{bash}
 git clone https://github.com/almarch/shinyChess.git
 ```
 
-The app uses [Stockfish](https://stockfishchess.org/). Clone the repository and build it (adapt ARCH to the actual target architecture).
+The app uses [Stockfish](https://stockfishchess.org/). Make sure the submodule is properly fetched.
 
 ```{bash}
 cd shinyChess
 git submodule init
 git submodule update
-cd Stockfish/src
-make -j profile-build
-mkdir ../../inst/bin
-cp stockfish ../../inst/bin/stockfish
-cd ../../..
+```
+
+Also install all R depedencies.
+
+```{bash}
 R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/rchess/rchess_0.1.tar.gz', repos = NULL, type = 'source')"
 R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/stockfish/stockfish_1.0.0.tar.gz', repos = NULL, type = 'source')"
 R -e "install.packages('bigchess', version = '1.9.1')"
+```
+
+shinyChess can then be installed.
+
+```{bash}
 R CMD INSTALL shinyChess
 ```
 

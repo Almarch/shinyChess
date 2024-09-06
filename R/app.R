@@ -2,11 +2,11 @@
 #'
 #'@name shinyChess
 #'@param port The port to use for shiny, default is 1997
-#'@export shinychess
+#'@export app
 #'
 #'
 
-shinychess = function(port = 1997,
+app = function(port = 1997,
                       host = "127.0.0.1"){
 
 options(shiny.port = port,

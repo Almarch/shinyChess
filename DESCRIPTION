@@ -6,5 +6,6 @@ Author@R:
 Descripton: play chess online
 License: CC0 1.0 Universal
 Encoding: UTF-8
+SystemRequirements: make, gcc
 Depends: shiny, rchess, stockfish, bigchess
-RoxygenNote: 7.2.3
+RoxygenNote: 7.2.3.9000
