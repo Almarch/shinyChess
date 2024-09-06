@@ -48,55 +48,63 @@ ui <- fluidPage(
   headerPanel(""),
 
   mainPanel(
-
-    bsplus::bs_accordion(
-            id = "admin_running"
+    fluidRow(column(4,
+      bsplus::bs_accordion(
+            id = "game_info"
+        ) |>
+        bs_set_opts(
+            panel_type = "warning"
         ) |>
         bs_append(
             title = "Portable game notation",
-            content = fluidRow()
+            content = fluidRow(
+              textOutput("pgn_out"),
+              actionButton("copy_pgn","Copy"),
+              actionButton("paste_pgn","Paste")
+            )
         ) |>
         bs_append(
             title = "Openings",
-            content = fluidRow()
-        ) |>
-        bs_append(
-            title = "Analysis",
-            content = fluidRow()
-        ),
-    
-    ### actions
-    textInput("move", "Play (white):"),
-    actionButton("play", "Move"),
-    actionButton("plop", "Open"),
-    actionButton("analysis_launch","Analysis"),
-    
-    ## pgn
-    textOutput("pgn_out"),
-    
-    ## possible moves
-    checkboxInput("show_moves", "Show all possible moves",F),
-    textOutput("possible_moves"),
-    
-    ## navigation
-    actionButton("first", "<<"),
-    actionButton("pre"  , "<" ),
-    actionButton("nex"  , ">" ),
-    actionButton("last" , ">>"),
-    
-    ## openings
-   selectInput(inputId = "open",
+            content = fluidRow(
+              selectInput(inputId = "open",
                           label = "Openings:",
                           choices  = c("",names(openings)),
                           selected = ""),
+              actionButton("plop", "Open")
+            )
+        ) |>
+        bs_append(
+            title = "Analysis",
+            content = fluidRow(
+              numericInput("movetime", "Analysis (sec/move):",value = 5),
+              actionButton("analysis_launch","Analysis"),
+              plotOutput("analysis_along")
+            )
+        )
+    ),
+    column(8,
+      fluidRow(column(12,
+          chessboardjsOutput('board', width = 300),
+          align = "center"
+      )),
+      fluidRow(
+        column(6,
+          ## navigation
+          actionButton("first", "<<"),
+          actionButton("pre"  , "<" ),
+          actionButton("nex"  , ">" ),
+          actionButton("last" , ">>"),
+          align = "center"
+        ),
+        column(3,textInput("move", "Play (white):")),
+        column(3,actionButton("play", "Move"))
 
-    ## analysis
-    numericInput("movetime", "Analysis (sec/move):",value = 5),
-    br(),
-
-    chessboardjsOutput('board', width = 300),
-    plotOutput("analysis_along")
-  ),
+        ## possible moves
+        #checkboxInput("show_moves", "Show all possible moves",F),
+        #textOutput("possible_moves"),
+      )
+    ))
+  )
 )
 
 server <- function(input, output, session) {

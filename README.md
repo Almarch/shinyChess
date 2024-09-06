@@ -47,10 +47,10 @@ The app now runs at http://127.0.0.1:1997/
 
 ### Installation with Docker
 
-Install shinyChess without the need for an R environment using docker. Pull the Dockerfile from within the shinyChess repository, as both shinyChess and the Stockfish binary will be added to the container:
+Install shinyChess without the need for an R environment using docker.
 
 ```sh
-cp shinyChess/Dockerfile .
+cd shinyChess
 docker build -t chess .
 ```
 
