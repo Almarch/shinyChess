@@ -55,7 +55,7 @@ Start by cloning the repository.
 git clone https://github.com/almarch/shinyChess.git
 ```
 
-The app uses [Stockfish](https://stockfishchess.org/). Make sure the submodule is properly fetched.
+Make sure Stockfish submodule is properly fetched.
 
 ```sh
 cd shinyChess
