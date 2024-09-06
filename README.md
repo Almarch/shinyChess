@@ -8,6 +8,7 @@ This is an app to play & study chess. It lies upon powerful tools:
 - The chess solver [stockfish](https://github.com/official-stockfish/Stockfish). This is the AI that is used to analyse the parties and predict the next best move.
 - The web framework [shiny](https://github.com/rstudio/shiny). It supports the user interface and allow for web deployment.
 
+<div align="center">
 <div style="
     display: flex;
     flex-direction: row;
@@ -17,6 +18,7 @@ This is an app to play & study chess. It lies upon powerful tools:
     <img src="https://github.com/user-attachments/assets/3c73d0fe-169c-49da-84d0-8f5e330bd9ec" alt="chessboardjs"  width="200px">
     <img src="https://stockfishchess.org/images/logo/icon_512x512@2x.png" alt="stockfish"  width="200px">
     <img src="https://camo.githubusercontent.com/b1bcd1d17cbe316d92317dbdcfead95a3fef02332b2ac8333ea09bd91365d74e/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f7468756d622f622f62662f5368696e795f6865785f6c6f676f2e7376672f38303070782d5368696e795f6865785f6c6f676f2e7376672e706e67" alt="Shiny"  width="170px">
+</div>
 </div>
 
 ## Installation
