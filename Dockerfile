@@ -23,6 +23,6 @@ WORKDIR /
 
 RUN R CMD INSTALL shinyChess
 
-CMD R -e "library(shinyChess); app(port = 80, host = '0.0.0.0')"
+CMD R -e "library(shinyChess); app(shiny.port = 80, shiny.host = '0.0.0.0')"
 
 EXPOSE 80

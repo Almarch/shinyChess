@@ -82,7 +82,7 @@ It may now be launched from R:
 
 ```r
 library(shinyChess)
-app(port = 1997)
+app(shiny.port = 1997)
 ```
 
 The app now runs at http://127.0.0.1:1997/
