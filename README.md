@@ -125,7 +125,7 @@ If an opening is played, its name will appear selected in the drop list. An open
 
 To analyze the game, from the third element or the lateral accordion: select the analysis time per move and click the launcher button. Be careful, even a few seconds make a long time for a long party.
 
-The party is analyzed using [Stockfish](https://en.wikipedia.org/wiki/Stockfish_%28chess%29) one of the most powerful chess solver. The result is yielded as a plot.
+The party is analyzed using [Stockfish](https://en.wikipedia.org/wiki/Stockfish_%28chess%29), one of the most powerful chess solver. The result is yielded as a plot.
 
 ![image](https://github.com/user-attachments/assets/06abaedd-f033-48a4-b5d4-3ef62cda434b)
 
