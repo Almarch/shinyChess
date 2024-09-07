@@ -6,11 +6,9 @@
 #'
 #'
 
-app = function(port = 1997,
-                      host = "127.0.0.1"){
+app = function(...){
 
-options(shiny.port = port,
-	      shiny.host = host)
+options(...)
 
   # load stockfish
   engine = fish$new(system.file("bin", "stockfish", package = "shinyChess"))
