@@ -35,7 +35,7 @@ cd shinyChess
 docker build -t chess .
 ```
 
-The container can now be launched with Docker.
+The container can then be launched with Docker:
 
 ```sh
 docker run -d -p 1997:80 chess
@@ -72,13 +72,13 @@ install.packages('https://cran.r-project.org/src/contrib/Archive/stockfish/stock
 install.packages('bigchess', version = '1.9.1')
 ```
 
-shinyChess can then be installed.
+shinyChess can be installed as an R package:
 
 ```sh
 R CMD INSTALL shinyChess
 ```
 
-It may now be launched from R:
+It may then be launched from R:
 
 ```r
 library(shinyChess)
