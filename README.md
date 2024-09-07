@@ -113,6 +113,10 @@ Navigate back and forth through the party using the navigation arrows.
 
 The party PGN is displayed on the first element of the lateral accordion. Save it to your clipboard using the **Copy** button; or load a new party from your clipboard using **Paste**. 
 
+For instance, copy the following PGN and load it in the app:
+
+<samp>1.e4 c5 2.c3 d5 3.exd5 Qxd5 4.d4 Nf6 5.Nf3 Bg4 6.Be2 e6 7.h3 Bh5 8.O-O Nc6 9.Be3 cxd4 10.cxd4 Bb4 11.a3 Ba5 12.Nc3 Qd6 13.Nb5 Qe7 14.Ne5 Bxe2 15.Qxe2 O-O 16.Rac1 Rac8 17.Bg5 Bb6 18.Bxf6 gxf6 19.Nc4 Rfd8 20.Nxb6 axb6 21.Rfd1 f5 22.Qe3 Qf6 23.d5 Rxd5 24.Rxd5 exd5 25.b3 Kh8 26.Qxb6 Rg8 27.Qc5 d4 28.Nd6 f4 29.Nxb7 Ne5 30.Qd5 f3 31.g3 Nd3 32.Rc7 Re8 33.Nd6 Re1+ 34.Kh2 Nxf2 35.Nxf7+ Kg7 36.Ng5+ Kh6 37.Rxh7+</samp>
+
 ### Openings
 
 The R package rchess comes with a collection of openings. They are gathered in the drop list of the second element of the lateral accordion.
