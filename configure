@@ -1,0 +1,9 @@
+if ! [ -f "inst/bin/stockfish" ]; then
+    cd Stockfish/src
+    make -j profile-build
+    mkdir ../../inst/bin
+    cp stockfish ../../inst/bin/stockfish
+    cd ../../..
+fi
+
+
