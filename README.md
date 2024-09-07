@@ -111,7 +111,7 @@ Navigate back and forth through the party using the navigation arrows.
 
 ### Save and load the party
 
-The party PGN is displayed on the first element of the lateral accordion. Save it to your clipboard using the **Copy** button ; or load a new party from your clipboard using **Paste**. 
+The party PGN is displayed on the first element of the lateral accordion. Save it to your clipboard using the **Copy** button; or load a new party from your clipboard using **Paste**. 
 
 ### Openings
 
@@ -123,7 +123,15 @@ If an opening is played, its name will appear selected in the drop list. An open
 
 ### Game analysis
 
+To analyze the game, from the third element or the lateral accordion: select the analysis time per move and click the launcher button. Be careful, even a few seconds make a long time for a long party.
+
+The party is analyzed using [Stockfish](https://en.wikipedia.org/wiki/Stockfish_%28chess%29) one of the most powerful chess solver. The result is yielded as a plot.
+
 ![image](https://github.com/user-attachments/assets/06abaedd-f033-48a4-b5d4-3ef62cda434b)
+
+The analysis plot takes all analyzed moves as x and the advantage in centipawn (cp) as y. The y axis is presented on a sigmoid scale. A positive value is an advantage for White and a negative value is an advantage for Black.
+
+The vertical red line identifies the current move. On top, the exact advantage and the best next move are displayed. The party can be explored using the game navigation arrows.
 
 ## License
 
