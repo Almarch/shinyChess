@@ -11,7 +11,7 @@ app = function(...){
 options(...)
 
   # load stockfish
-  engine = fish$new(system.file("bin", "stockfish", package = "shinyChess"))
+  engine = fish$new()
   engine$uci()
 
   ui <- fluidPage(
