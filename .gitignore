@@ -1,1 +1,4 @@
 app/rsconnect
+app/renv
+app/.Rprofile
+app/renv.lock
