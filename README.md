@@ -101,11 +101,17 @@ A demo version is kindly hosted on [Posit Cloud](https://posit.co) at [<img src=
 
 ## Use
 
-### Play and navigate the game
+### Play
+
+The game can be played and is recorded using the [Portable Game Notation](https://en.wikipedia.org/wiki/Portable_Game_Notation) (PGN). Select the next move using the drop list, and confirm with **Play**.
+
+Navigate back and forth through the party using the navigation arrows.
 
 ![image](https://github.com/user-attachments/assets/29c5f9d9-65d0-46a9-bb1f-aa4e3442c28c)
 
-### Save and load PGNs
+### Save and load the party
+
+The party PGN is displayed on the first element of the lateral accordion. Save it to your clipboard using the **Save** button ; or load a new party from your clipboard using **Paste**. 
 
 ### Openings
 ![image](https://github.com/user-attachments/assets/16e9b028-05af-4a7b-8d06-baf537cdecf7)
