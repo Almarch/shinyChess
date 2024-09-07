@@ -35,7 +35,7 @@ cd shinyChess
 docker build -t chess .
 ```
 
-The container can now be launched with Docker.
+The container can then be launched with Docker:
 
 ```sh
 docker run -d -p 1997:80 chess
@@ -72,13 +72,13 @@ install.packages('https://cran.r-project.org/src/contrib/Archive/stockfish/stock
 install.packages('bigchess', version = '1.9.1')
 ```
 
-shinyChess can then be installed.
+shinyChess can be installed as an R package:
 
 ```sh
 R CMD INSTALL shinyChess
 ```
 
-It may now be launched from R:
+It may then be launched from R:
 
 ```r
 library(shinyChess)
@@ -101,18 +101,37 @@ A demo version is kindly hosted on [Posit Cloud](https://posit.co) at [<img src=
 
 ## Use
 
-### Play and navigate the game
+### Play
+
+The game can be played and is recorded using the [Portable Game Notation](https://en.wikipedia.org/wiki/Portable_Game_Notation) (PGN). Select the next move using the drop list, and confirm with **Play**.
+
+Navigate back and forth through the party using the navigation arrows.
 
 ![image](https://github.com/user-attachments/assets/29c5f9d9-65d0-46a9-bb1f-aa4e3442c28c)
 
-### Save and load PGNs
+### Save and load the party
+
+The party PGN is displayed on the first element of the lateral accordion. Save it to your clipboard using the **Copy** button; or load a new party from your clipboard using **Paste**. 
 
 ### Openings
+
+The R package rchess comes with a collection of openings. They are gathered in the drop list of the second element of the lateral accordion.
+
+If an opening is played, its name will appear selected in the drop list. An opening may also be selected and played at any time. It then replaces the current party.
+
 ![image](https://github.com/user-attachments/assets/16e9b028-05af-4a7b-8d06-baf537cdecf7)
 
 ### Game analysis
 
+To analyze the game, from the third element or the lateral accordion: select the analysis time per move and click the launcher button. Be careful, even a few seconds make a long time for a long party.
+
+The party is analyzed using [Stockfish](https://en.wikipedia.org/wiki/Stockfish_%28chess%29), one of the most powerful chess solver. The result is yielded as a plot.
+
 ![image](https://github.com/user-attachments/assets/06abaedd-f033-48a4-b5d4-3ef62cda434b)
+
+The analysis plot takes all analyzed moves as x and the advantage in centipawn (cp) as y. The y axis is presented on a sigmoid scale. A positive value is an advantage for White and a negative value is an advantage for Black.
+
+The vertical red line identifies the current move. On top, the exact advantage and the best next move are displayed. The party can be explored using the game navigation arrows.
 
 ## License
 
