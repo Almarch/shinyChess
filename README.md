@@ -111,9 +111,14 @@ Navigate back and forth through the party using the navigation arrows.
 
 ### Save and load the party
 
-The party PGN is displayed on the first element of the lateral accordion. Save it to your clipboard using the **Save** button ; or load a new party from your clipboard using **Paste**. 
+The party PGN is displayed on the first element of the lateral accordion. Save it to your clipboard using the **Copy** button ; or load a new party from your clipboard using **Paste**. 
 
 ### Openings
+
+The R package rchess comes with a collection of openings. They are gathered in the drop list of the second element of the lateral accordion.
+
+If an opening is played, its name will appear selected in the drop list. An opening may also be selected and played at any time. It then replaces the current party.
+
 ![image](https://github.com/user-attachments/assets/16e9b028-05af-4a7b-8d06-baf537cdecf7)
 
 ### Game analysis
