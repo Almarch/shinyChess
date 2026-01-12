@@ -1,4 +1,4 @@
-# <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Chess_Zdt45.svg/45px-Chess_Zdt45.svg.png?20170728103323" width = "50px" /> shinyChess
+# <img src="inst/www/icon.png" width = "50px" /> shinyChess
 
 This is an app to play & study chess. It lies upon powerful tools:
 
@@ -17,7 +17,7 @@ This is an app to play & study chess. It lies upon powerful tools:
 ">
     <img src="https://github.com/user-attachments/assets/3c73d0fe-169c-49da-84d0-8f5e330bd9ec" alt="chessboardjs"  width="200px">
     <img src="https://stockfishchess.org/images/logo/icon_512x512@2x.png" alt="stockfish"  width="200px">
-    <img src="https://camo.githubusercontent.com/b1bcd1d17cbe316d92317dbdcfead95a3fef02332b2ac8333ea09bd91365d74e/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f7468756d622f622f62662f5368696e795f6865785f6c6f676f2e7376672f38303070782d5368696e795f6865785f6c6f676f2e7376672e706e67" alt="Shiny"  width="170px">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Shiny_hex_logo.svg/960px-Shiny_hex_logo.svg.png" alt="Shiny" width="170px">
 </div>
 </div>
 
@@ -45,7 +45,7 @@ The app now runs at http://127.0.0.1:1997/
 
 ### Installation as an R package
 
-<img src="https://camo.githubusercontent.com/b89c3467bd2fb1ed2452237329f6974aec62c88eb423cde6429aad2a8f2383a1/68747470733a2f2f6372616e2e722d70726f6a6563742e6f72672f526c6f676f2e737667" width="80px" align="right"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/R_logo.svg" width="80px" align="right"/>
 
 Installation as an R package can only be performed on GNU/Linux because of the Stockfish compilation step.
 
@@ -95,7 +95,7 @@ The app now runs at http://127.0.0.1:1997/
 
 ### On Posit Cloud
 
-<img src="https://docs.posit.co/images/product-icons/posit-icon-fullcolor.png" width="80px" align="right"/>
+<img src="https://solutions.posit.co/images/brand/posit-icon-fullcolor.svg" width="80px" align="right"/>
 
 A demo version is kindly hosted on [Posit Cloud](https://posit.co) at [<img src="inst/www/icon.png" width = "20px" /> this adress](https://almarch.shinyapps.io/shinyChess/). Deployment on the Posit Cloud is realized from RStudio calling `app/app.R` of the [posit branch](https://github.com/Almarch/shinyChess/tree/posit) from RStudio. The ***posit*** branch uses the version of stockfish embedded in the eponymous R package <i>i.e.</i> version 14, instead of the latest one as dynamically built in the ***main*** branch.
 
